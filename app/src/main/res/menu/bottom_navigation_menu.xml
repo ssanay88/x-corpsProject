@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 메인 (상태 보여주는곳) -->
+    <item
+        android:id="@+id/page_1"
+        android:enabled="true"
+        android:icon="@drawable/main_icon"
+        android:title="@string/main_page"/>
+
+    <!-- 그래프 보여주는 곳 -->
+    <item
+        android:id="@+id/page_2"
+        android:enabled="true"
+        android:icon="@drawable/graph_icon"
+        android:title="@string/graph_page"/>
+
+    <!-- 동영상 추천 액티비티 -->
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/video_icon"
+        android:title="@string/video_page"/>
+
+</menu>
