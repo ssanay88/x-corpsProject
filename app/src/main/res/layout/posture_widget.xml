@@ -27,5 +27,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="147dp"
-        android:text="@string/add_widget" />
+        android:text="@string/appwidget_text" />
 </RelativeLayout>
