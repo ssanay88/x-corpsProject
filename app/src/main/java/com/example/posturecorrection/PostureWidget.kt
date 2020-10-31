@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
+import android.widget.Toast
 
 /**
  * Implementation of App Widget functionality.
@@ -41,6 +42,7 @@ class PostureWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             val widgetText = context.getString(R.string.appwidget_text)
+            Toast.makeText(context, "widgegText", Toast.LENGTH_SHORT).show()
             // Construct the RemoteViews object
             val views = RemoteViews(context.packageName, R.layout.posture_widget)
             //views.setTextViewText(R.id.appwidget_text, widgetText)
