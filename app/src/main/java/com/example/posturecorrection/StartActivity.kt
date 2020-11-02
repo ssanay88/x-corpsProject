@@ -10,7 +10,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         Thread.sleep(1500)
-        val intent = Intent(this, ChartActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
 
 

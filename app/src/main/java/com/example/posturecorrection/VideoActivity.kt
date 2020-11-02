@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class ChartActivity : AppCompatActivity() {
+class VideoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chart)
+        setContentView(R.layout.activity_video)
 
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId){
@@ -36,6 +36,5 @@ class ChartActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 }

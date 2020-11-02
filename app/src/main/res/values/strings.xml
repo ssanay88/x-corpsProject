@@ -15,11 +15,14 @@
 
     <string name="start_date">시작일</string>
     <string name="end_date">현재까지</string>
+    <string name="content_description_media">state image</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fbYOUR_APP_ID</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

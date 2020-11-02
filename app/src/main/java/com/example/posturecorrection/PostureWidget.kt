@@ -42,7 +42,7 @@ class PostureWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             val widgetText = context.getString(R.string.appwidget_text)
-            Toast.makeText(context, "widgegText", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, widgetText, Toast.LENGTH_SHORT).show()
             // Construct the RemoteViews object
             val views = RemoteViews(context.packageName, R.layout.posture_widget)
             //views.setTextViewText(R.id.appwidget_text, widgetText)
