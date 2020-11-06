@@ -1,40 +1,50 @@
 package com.example.posturecorrection
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.util.Log
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
+import kotlinx.android.synthetic.main.activity_video.*
+
 
 class VideoActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.page_1 -> {
+        Log.d(MainActivity.TAG, "비디오 액티비티")
+        webView.apply {
+            settings.javaScriptEnabled = true
+            webViewClient = WebViewClient()
+            webChromeClient = WebChromeClient()
+        }
+        var Text = Myapplication.prefs.getString("state","stable")
+        Log.d(MainActivity.TAG, "$Text")
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    true
+
+            when(Text){
+                "stable" -> {
+                    webView.loadUrl("https://www.youtube.com/watch?v=teikykTaW6I")
+
                 }
-
-                R.id.page_2 -> {
-
-                    val intent = Intent(this, ChartActivity::class.java)
-                    startActivity(intent)
-                    true
+                "waist" -> {
+                    webView.loadUrl("https://www.youtube.com/watch?v=2YFY91RB05o&list=WL&index=2&t=29s")
                 }
-
-                R.id.page_3 -> {
-
-                    val intent = Intent(this, VideoActivity::class.java)
-                    startActivity(intent)
-                    true
+                "shoulder" -> {
+                    webView.loadUrl( "https://www.youtube.com/watch?v=XT1dHyI86eQ&list=WL&index=3&t=3s")
                 }
-
-                else -> false
+                "back" -> {
+                    webView.loadUrl("https://www.youtube.com/watch?v=3zc1mGfA5kc&list=WL&index=1&t=4s")
+                }
             }
         }
-    }
+
+
+        // param 에다가 상황별로 URL 불러와서 넣기
+
+        // 허리 영상 https://www.youtube.com/watch?v=2YFY91RB05o&list=WL&index=2
+
 }
