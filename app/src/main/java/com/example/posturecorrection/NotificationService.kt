@@ -42,8 +42,8 @@ class NotificationService : IntentService("NotificationService") {
             false, getString(R.string.app_name), "App notification channel") // 1
 
         val channelId = "$packageName-${getString(R.string.app_name)}" // 2
-         var title = "자세 측정중입니다1"
-         var content = "자세 측정중입니다2"
+         var title = "자세 측정중입니다"
+         var content = "자세 측정중입니다"
 
         val intent = Intent(baseContext, VideoActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -86,7 +86,7 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "1")
 
                         NowState = "stable"
-                        var title1 = "안정된 자세입니다"
+                        var title1 = "바른 자세입니다"
                         var content1 = "스트레칭 보러가기"
                         //intent.putExtra("state", "stable")
                         builder.setContentTitle(title1)    // 6
@@ -99,7 +99,7 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "2")
 
                         NowState = "stable"
-                        var title1 = "안정된 자세입니다"
+                        var title1 = "평범한 자세입니다"
                         var content1 = "스트레칭 보러가기"
                         intent.putExtra("state", "stable")
                         builder.setContentTitle(title1)    // 6
@@ -114,7 +114,7 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "3")
 
                         NowState = "shoulder"
-                        var title3 = "어깨 자세입니다"
+                        var title3 = "정면으로 치우친 자세입니다"
                         var content3 = "스트레칭 보러가기"
                         intent.putExtra("state", "shoulder")
                         builder.setContentTitle(title3)    // 6
@@ -127,7 +127,7 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "4")
 
                         NowState = "shoulder"
-                        var title3 = "어깨 자세입니다"
+                        var title3 = "걸터 앉아 있는 자세입니다"
                         var content3 = "스트레칭 보러가기"
                         intent.putExtra("state", "shoulder")
                         builder.setContentTitle(title3)    // 6
@@ -139,9 +139,9 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "5")
 
                         NowState = "waist"
-                        var title2 = "허리 자세입니다"
+                        var title2 = "좌측으로 치우친 자세입니다"
                         var content2 = "스트레칭 보러가기"
-                        intent.putExtra("state", "back")
+                        intent.putExtra("state", "waist")
                         builder.setContentTitle(title2)    // 6
                         builder.setContentText(content2)    // 7
                         notificationManager.notify(NOTIFICATION_ID, builder.build())
@@ -151,9 +151,9 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "6")
 
                         NowState = "waist"
-                        var title2 = "허리 자세입니다"
+                        var title2 = "우측으로 치우친 자세입니다"
                         var content2 = "스트레칭 보러가기"
-                        intent.putExtra("state", "back")
+                        intent.putExtra("state", "waist")
                         builder.setContentTitle(title2)    // 6
                         builder.setContentText(content2)    // 7
                         notificationManager.notify(NOTIFICATION_ID, builder.build())    // 11
@@ -163,8 +163,8 @@ class NotificationService : IntentService("NotificationService") {
                     "7" -> {
                         Log.d(MainActivity.TAG, "7")
 
-                        NowState = "back"
-                        var title4 = "등 자세입니다"
+                        NowState = "waist"
+                        var title4 = "우측으로 기댄 자세입니다"
                         var content4 = "스트레칭 보러가기"
                         intent.putExtra("state", "waist")
                         builder.setContentTitle(title4)    // 6
@@ -176,9 +176,9 @@ class NotificationService : IntentService("NotificationService") {
                         Log.d(MainActivity.TAG, "8")
 
                         NowState = "back"
-                        var title4 = "등 자세입니다"
+                        var title4 = "좌측으로 기댄 자세입니다"
                         var content4 = "스트레칭 보러가기"
-                        intent.putExtra("state", "waist")
+                        intent.putExtra("state", "back")
                         builder.setContentTitle(title4)    // 6
                         builder.setContentText(content4)    // 7
                         notificationManager.notify(NOTIFICATION_ID, builder.build())    // 11

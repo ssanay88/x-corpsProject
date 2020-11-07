@@ -72,57 +72,57 @@ class StateFragment : Fragment() {
                 when(P){
 
                     "1" -> {
-                        now_image.setImageResource(R.drawable.video_icon)
-                        message.text = "1번 자세 입니다."
+                        now_image.setImageResource(R.drawable.ic_pose_one)
+                        message.text = "바른 자세 입니다."
                         Myapplication.prefs.setString("state","stable")
 
                     }
                     "2" ->
                     {
-                        now_image.setImageResource(R.drawable.main_icon)
-                        message.text = "2번 자세 입니다."
+                        now_image.setImageResource(R.drawable.ic_pose_two)
+                        message.text = "평범한 자세 입니다."
                         Myapplication.prefs.setString("state","stable")
 
                     }
                     "3" ->
                     {
-                        now_image.setImageResource(R.drawable.graph_icon)
-                        message.text = "3번 자세 입니다."
+                        now_image.setImageResource(R.drawable.ic_pose_three)
+                        message.text = "정면으로 치우친 자세 입니다."
                         Myapplication.prefs.setString("state","shoulder")
 
                     }
                     "4" ->
                     {
-                        now_image.setImageResource(R.drawable.app_logo)
-                        message.text = "4번 자세 입니다."
+                        now_image.setImageResource(R.drawable.ic_pose_four)
+                        message.text = "걸터 앉은 자세 입니다."
                         Myapplication.prefs.setString("state","shoulder")
 
                     }
                     "5" ->
                     {
-                        now_image.setImageResource(R.drawable.video_icon)
-                        message.text = "5번 자세 입니다."
-                        Myapplication.prefs.setString("state","back")
+                        now_image.setImageResource(R.drawable.ic_pose_five)
+                        message.text = "좌측으로 치우친 자세 입니다."
+                        Myapplication.prefs.setString("state","waist")
                     }
                     "6" ->
                     {
-                        now_image.setImageResource(R.drawable.main_icon)
-                        message.text = "6번 자세 입니다."
-                        Myapplication.prefs.setString("state","back")
+                        now_image.setImageResource(R.drawable.ic_pose_six)
+                        message.text = "우측으로 치우친 자세 입니다."
+                        Myapplication.prefs.setString("state","waist")
 
                     }
                     "7" ->
                     {
-                        now_image.setImageResource(R.drawable.app_logo)
-                        message.text = "7번 자세 입니다."
+                        now_image.setImageResource(R.drawable.ic_pose_seven)
+                        message.text = "우측으로 기댄 자세 입니다."
                         Myapplication.prefs.setString("state","waist")
 
                     }
                     "8" ->
                     {
-                        now_image.setImageResource(R.drawable.test_image)
-                        message.text = "8번 자세 입니다."
-                        Myapplication.prefs.setString("state","waist")
+                        now_image.setImageResource(R.drawable.ic_pose_eight)
+                        message.text = "좌측으로 기댄 자세 입니다."
+                        Myapplication.prefs.setString("state","back")
 
                     }
                 }

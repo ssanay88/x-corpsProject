@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1012307766208",
-    "firebase_url": "https://project-1-8b79c.firebaseio.com",
-    "project_id": "project-1-8b79c",
-    "storage_bucket": "project-1-8b79c.appspot.com"
+    "project_number": "1086908275902",
+    "firebase_url": "https://test1-3a331.firebaseio.com",
+    "project_id": "test1-3a331",
+    "storage_bucket": "test1-3a331.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1012307766208:android:eac99da74160bdbf49b625",
+        "mobilesdk_app_id": "1:1086908275902:android:9742293f66861e9b4652ef",
         "android_client_info": {
           "package_name": "com.example.posturecorrection"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1012307766208-89vlrsfg463chs7e0gkvub0jid1pq4i1.apps.googleusercontent.com",
+          "client_id": "1086908275902-b32ok282k8qth210fl0vpmklol005hnq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVYsm3PyZRX8Ih4PR1asl1x76ZOcvCXMs"
+          "current_key": "AIzaSyCehGDYlMqzB1h5-h0tXYWbV38RWoQ_blQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1012307766208-89vlrsfg463chs7e0gkvub0jid1pq4i1.apps.googleusercontent.com",
+              "client_id": "1086908275902-b32ok282k8qth210fl0vpmklol005hnq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

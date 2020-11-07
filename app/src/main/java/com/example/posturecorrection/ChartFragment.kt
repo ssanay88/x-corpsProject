@@ -50,7 +50,7 @@ class ChartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var nowState = 1
+    private var nowState = 0
 
     // 시작 년 월 일
     private var start_year: String?= null
@@ -70,6 +70,8 @@ class ChartFragment : Fragment() {
     var postion6:Int = 0
     var postion7:Int = 0
     var postion8:Int = 0
+
+
 
     private var calendar: Calendar = Calendar.getInstance()
 
@@ -96,8 +98,6 @@ class ChartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Video_button.setOnClickListener {
-
-
             when(nowState){
                 1 -> {
                     // 정상 자세 스트레칭 영상
@@ -119,7 +119,6 @@ class ChartFragment : Fragment() {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=XT1dHyI86eQ&list=WL&index=3&t=3s"))
                     view.context.startActivity(intent)
                 }
-
                 else -> Toast.makeText(context!!, "자세를 선택하여 주세요", Toast.LENGTH_SHORT).show()
             }
         }
@@ -136,6 +135,7 @@ class ChartFragment : Fragment() {
         end_date_btn.setOnClickListener {
             take_date_end()
             Log.d(MainActivity.TAG, "Current date2: ${end_year} + ${end_month} + ${end_day}")
+
         }
 
         // 날짜에 따른 조회 버튼
@@ -154,22 +154,76 @@ class ChartFragment : Fragment() {
                 Toast.makeText(context!!, "날짜 선택이 올바르지 않습니다", Toast.LENGTH_SHORT).show()
             }
             else {
+                //getDocument()
+                Log.d(MainActivity.TAG, "Chart date ${postion1} + ${postion2} + ${postion3} + ${postion4}")
+                Log.d(MainActivity.TAG, "Chart date ${postion5} + ${postion6} + ${postion7} + ${postion8}")
 
-                //var C = afterDate("$start_year-$start_month-$start_day" , 5 ,"yyyy-MM-dd")
-                //Toast.makeText(context!!, "$C", Toast.LENGTH_SHORT).show()
-            getDocument()
-            ChartDraw()
+                var StartDate = "$start_year-$start_month-$start_day 00:00:00"              //시작 날짜
+                var EndDate = "$end_year-$end_month-$end_day 00:00:00"                      // 끝 날짜
+                var sf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")                    // 패턴
+                var first_date = sf.parse(StartDate)
+                var last_date = sf.parse(EndDate)
+                var calcuDate = (last_date.time - first_date.time) / (60 * 60 * 24 * 1000)  //날짜 차이 구하기
+                Log.d(MainActivity.TAG, "날짜 차이 : $calcuDate")
+
+                for (i in 0..calcuDate){
+                    var CheckDate = afterDate("$start_year-$start_month-$start_day" , i.toInt() ,"yyyy-MM-dd")
+                    val GetDate = CheckDate.split("-")
+                    var GetYear = GetDate[0]
+                    var GetMonth = GetDate[1].toString()
+                    var GetDay = GetDate[2].toString()
+
+                    //Toast.makeText(context!!, "$GetMonth+$GetDay", Toast.LENGTH_SHORT).show()
+
+                    val docRef = db.collection("$GetMonth").document("$GetDay")
+
+                    docRef.get()
+                        .addOnSuccessListener { document ->
+
+                            val StartMap = document.data as Map<String, Any>
+
+                            if (document != null) {
+                                Log.d("MainActivity", "DocumentSnapshot data: ${document.data}")
+
+                                for((key, value) in StartMap) {
+                                    when (value.toString()) {
+
+                                        "1" -> postion1 += 1
+                                        "2" -> postion2 += 1
+                                        "3" -> postion3 += 1
+                                        "4" -> postion4 += 1
+                                        "5" -> postion5 += 1
+                                        "6" -> postion6 += 1
+                                        "7" -> postion7 += 1
+                                        "8" -> postion8 += 1
+                                    }
+                                }
+                                ChartDraw()
+
+
+                            } else {
+                                Log.d("MainActivity", "No such document")
+                                //Toast.makeText(this, "데이터 없엉", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        .addOnFailureListener {
+                            // Toast.makeText(this, "연결 실패", Toast.LENGTH_SHORT).show()
+                        }
+                }       //getDocument()
+
 
 
             Log.d(MainActivity.TAG, "Current date1: ${start_year} + ${start_month} + ${start_day}")
-             postion1 = 0
-             postion2 = 0
-             postion3 = 0
-             postion4 = 0
-             postion5 = 0
-             postion6 = 0
-             postion7 = 0
-             postion8 = 0
+                Log.d(MainActivity.TAG, "Current date2: ${end_year} + ${end_month} + ${end_day}")
+                postion1 = 0
+                postion2 = 0
+                postion3 = 0
+                postion4 = 0
+                postion5 = 0
+                postion6 = 0
+                postion7 = 0
+                postion8 = 0
+
 
             }
         }
@@ -184,7 +238,6 @@ class ChartFragment : Fragment() {
         var smonth = calendar.get(Calendar.MONTH)
         var sday = calendar.get(Calendar.DAY_OF_MONTH)
 
-
         var listener = DatePickerDialog.OnDateSetListener { _, i, i2, i3 ->
             syear = i
             smonth = i2+1
@@ -193,12 +246,10 @@ class ChartFragment : Fragment() {
             start_month = smonth.toString()
             start_day = sday.toString()
             start_date_btn.text = "${syear}/${smonth}/${sday}"
-
         }
 
         var picker = DatePickerDialog(context!!, listener, syear, smonth, sday)
         picker.show()
-
     }
 
     fun take_date_end() {
@@ -206,7 +257,6 @@ class ChartFragment : Fragment() {
         var eyear = calendar.get(Calendar.YEAR)
         var emonth = calendar.get(Calendar.MONTH)
         var eday = calendar.get(Calendar.DAY_OF_MONTH)
-
 
         var listener = DatePickerDialog.OnDateSetListener { _, i, i2, i3 ->
             eyear = i
@@ -217,14 +267,16 @@ class ChartFragment : Fragment() {
             end_year = eyear.toString()
             end_month = emonth.toString()
             end_day = eday.toString()
-
         }
 
         var picker = DatePickerDialog(context!!, listener, eyear, emonth, eday)
         picker.show()
-
-
     }
+
+
+
+
+
 
     fun ChartDraw() {
         chart.setUsePercentValues(true)
@@ -270,8 +322,6 @@ class ChartFragment : Fragment() {
                 legend.isEnabled = false
             }
 
-
-
         // 차트에서 조각 선택시 행동
         chart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
             override fun onValueSelected(e: Entry, h: Highlight) {
@@ -284,43 +334,43 @@ class ChartFragment : Fragment() {
 
                 when(i.toString()){
                     "1" -> {
-                        imageView.setImageResource(R.drawable.test_image)
-                        position_text.text = "1번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_one)
+                        position_text.text = "바른 자세입니다."
                         nowState = 1
                     }
                     "2" -> {
-                        imageView.setImageResource(R.drawable.graph_icon)
-                        position_text.text = "2번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_two)
+                        position_text.text = "평범한 자세입니다."
                         nowState = 1
                     }
                     "3" -> {
-                        imageView.setImageResource(R.drawable.main_icon)
-                        position_text.text = "3번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_three)
+                        position_text.text = "정면으로 치우친 자세입니다."
                         nowState = 2
                     }
                     "4" -> {
-                        imageView.setImageResource(R.drawable.test_image)
-                        position_text.text = "4번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_four)
+                        position_text.text = "걸터 앉아있는 자세입니다."
                         nowState = 2
                     }
                     "5" -> {
-                        imageView.setImageResource(R.drawable.test_image)
-                        position_text.text = "5번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_five)
+                        position_text.text = "좌측으로 치우친 자세입니다."
                         nowState = 3
                     }
                     "6" -> {
-                        imageView.setImageResource(R.drawable.app_logo)
-                        position_text.text = "6번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_six)
+                        position_text.text = "우측으로 치우친 자세입니다."
                         nowState = 3
                     }
                     "7" -> {
-                        imageView.setImageResource(R.drawable.main_icon)
-                        position_text.text = "7번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_seven)
+                        position_text.text = "우측으로 기댄 자세입니다."
                         nowState = 4
                     }
                     "8" -> {
-                        imageView.setImageResource(R.drawable.test_image)
-                        position_text.text = "8번 자세입니다."
+                        imageView.setImageResource(R.drawable.ic_pose_eight)
+                        position_text.text = "좌측으로 기댄 자세입니다."
                         nowState = 4
                     }
 
@@ -343,83 +393,12 @@ class ChartFragment : Fragment() {
         return format.format(calendar.time)
     }
 
-    private fun getDocument() {
 
-
-        var StartDate = "$start_year-$start_month-$start_day 00:00:00"              //시작 날짜
-        var EndDate = "$end_year-$end_month-$end_day 00:00:00"                      // 끝 날짜
-        var sf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")                    // 패턴
-        var first_date = sf.parse(StartDate)
-        var last_date = sf.parse(EndDate)
-        var calcuDate = (last_date.time - first_date.time) / (60 * 60 * 24 * 1000)  //날짜 차이 구하기
-
-
-
-        for (i in 0..calcuDate){
-            var CheckDate = afterDate("$start_year-$start_month-$start_day" , i.toInt() ,"yyyy-MM-dd")
-            val GetDate = CheckDate.split("-")
-            var GetYear = GetDate[0]
-            var GetMonth = GetDate[1].toString()
-            var GetDay = GetDate[2].toString()
-
-            //Toast.makeText(context!!, "$GetMonth+$GetDay", Toast.LENGTH_SHORT).show()
-
-            val docRef = db.collection("$GetMonth").document("$GetDay")
-
-            docRef.get()
-                .addOnSuccessListener { document ->
-
-                    val StartMap = document.data as Map<String, Any>
-
-                    if (document != null) {
-                        Log.d("MainActivity", "DocumentSnapshot data: ${document.data}")
-
-                        for((key, value) in StartMap) {
-                            when (value.toString()) {
-
-                                "1" -> postion1 += 1
-                                "2" -> postion2 += 1
-                                "3" -> postion3 += 1
-                                "4" -> postion4 += 1
-                                "5" -> postion5 += 1
-                                "6" -> postion6 += 1
-                                "7" -> postion7 += 1
-                                "8" -> postion8 += 1
-                            }
-                        }
-
-                    } else {
-                        Log.d("MainActivity", "No such document")
-                        //Toast.makeText(this, "데이터 없엉", Toast.LENGTH_SHORT).show()
-                    }
-
-
-                }
-
-
-                .addOnFailureListener {
-                    // Toast.makeText(this, "연결 실패", Toast.LENGTH_SHORT).show()
-
-                }
-
-
-        }
-
-
-    }
 
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChartFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(): ChartFragment {
             return ChartFragment()

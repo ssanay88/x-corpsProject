@@ -10,7 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -26,10 +26,12 @@
             android:orientation="vertical">
 
             <!-- Media -->
+
             <ImageView
                 android:id="@+id/now_image"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="469dp"
+                android:layout_marginTop="40dp"
                 android:contentDescription="@string/content_description_media"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/test_image" />
@@ -41,7 +43,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="기본 상태입니다."
-                android:textSize="36sp" />
+                android:textSize="28sp" />
 
         </LinearLayout>
 
