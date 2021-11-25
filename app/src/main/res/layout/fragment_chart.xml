@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:id="@+id/Chart_Frame">
 
-
+    <!-- 차트 사용을 위한 라이브러리 -->
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="360dp"
@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 현재 자세를 보여줄 이미지 뷰  -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="130dp"
@@ -32,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/chart"
         tools:src="@tools:sample/avatars" />
 
+    <!--  어떤 자세인지 보여줄 텍스트 뷰  -->
     <TextView
         android:id="@+id/position_text"
         android:layout_width="238dp"
@@ -46,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/chart" />
 
 
+    <!--  스트레칭 영상을 보여줄 버튼  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/Video_button"
         android:layout_width="0dp"
@@ -59,6 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/position_text" />
 
 
+    <!--  시작일을 설정할 버튼  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/start_date_btn"
         style="?attr/materialButtonOutlinedStyle"

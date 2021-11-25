@@ -33,18 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         const val TAG: String = "로그"
-        //lateinit var NowState : MySharedPreferences
     }
 
-    private lateinit var stateFragment:StateFragment
-    private lateinit var chartFragment:ChartFragment
-
-
-    //private val db = FirebaseFirestore.getInstance()
-
-
-
-
+    private lateinit var stateFragment:StateFragment    // 현재 상태를 보여주는 프래그먼트
+    private lateinit var chartFragment:ChartFragment    // 차트를 보여주기 위한 프래그먼트
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,89 +50,8 @@ class MainActivity : AppCompatActivity() {
         val Serviceintent = Intent(this , NotificationService::class.java)
         startService(Serviceintent)
 
-/*
-        // 실시간 데이터 가져오기
-        val docRef = db.collection("user").document("position") // 콜렉션 , 문서 변경
-
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w(MainActivity.TAG, "Listen failed.", e)
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null && snapshot.exists()) {
-                //Log.d(MainActivity.TAG, "Current data: ${snapshot.data}")
-
-                val Map = snapshot.data as Map<String, Any>
-
-                when(Map.values.toString()){
-
-                    "1" -> {
-                        Log.d(MainActivity.TAG, "이프문작동")
-                        now_image.setImageResource(R.drawable.video_icon)
-                        message.text = "1번 자세 입니다."
-                        NowState = "stable"
-
-                    }
-                    "2" ->
-                    {
-                        now_image.setImageResource(R.drawable.main_icon)
-                        message.text = "2번 자세 입니다."
-                        NowState = "stable"
-                    }
-                    "3" ->
-                    {
-                        now_image.setImageResource(R.drawable.graph_icon)
-                        message.text = "3번 자세 입니다."
-                        NowState = "shoulder"
-                    }
-                    "4" ->
-                    {
-                        now_image.setImageResource(R.drawable.app_logo)
-                        message.text = "4번 자세 입니다."
-                        NowState = "shoulder"
-
-                    }
-                    "5" ->
-                    {
-                        now_image.setImageResource(R.drawable.video_icon)
-                        message.text = "5번 자세 입니다."
-                        NowState = "waist"
-
-                    }
-                    "6" ->
-                    {
-                        now_image.setImageResource(R.drawable.main_icon)
-                        message.text = "6번 자세 입니다."
-                        NowState = "waist"
-
-                    }
-                    "7" ->
-                    {
-                        now_image.setImageResource(R.drawable.app_logo)
-                        message.text = "7번 자세 입니다."
-                        NowState = "back"
-
-                    }
-                    "8" ->
-                    {
-                        now_image.setImageResource(R.drawable.test_image)
-                        message.text = "8번 자세 입니다."
-                        NowState = "back"
-
-                    }
-
-                }
-
-            } else {
-                Log.d(MainActivity.TAG, "Current data: null")
-
-            }
-        }
-        */
 
     }
-
 
 
 
