@@ -32,4 +32,5 @@
 <!--
 프래그먼트를 사용할 FrameLayout
 프래그먼트를 불러올 BottomNavigation
+BottomNavigationView에 메뉴 아이템 연결
 -->

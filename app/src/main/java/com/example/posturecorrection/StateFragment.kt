@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_state.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +27,9 @@ class StateFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // Firebase - Firestore 인스턴스 생성
     private val db = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +41,6 @@ class StateFragment : Fragment() {
     }
 
 
-
-
-
-
     // 프래그먼트에 표시할 뷰를 레이아웃 파일로부터 읽어오는 부분 - fragment_state.xml파일을 가져온다
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +48,17 @@ class StateFragment : Fragment() {
     ): View? {
 
         return inflater.inflate(R.layout.fragment_state, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val docRef = db.collection("user").document("position") // 콜렉션 , 문서 변경
 
+        // 실시간 업데이트 가져오기
+        // snapshot : DB에 변화가 생길경우 일종의 리스너 , e : Firestore 예외
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w(MainActivity.TAG, "Listen failed.", e)
@@ -67,8 +70,10 @@ class StateFragment : Fragment() {
                 // 값의 변화에 따라서 변경
                 // stateFragment 변경 -> 알림창도 변경시켜야함
 
-                val Map = snapshot.data as Map<String, Any>
-                val P = Map["now"].toString()
+                val Map = snapshot.data as Map<String, Any>    // 데이터를 키와 값으로 변형
+                val P = Map["now"].toString()    // 지금 자세를 가져오는 변수
+
+                // 자세별로 이미지와 텍스트 변경
                 when(P){
 
                     "1" -> {
@@ -77,6 +82,7 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","stable")
 
                     }
+
                     "2" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_two)
@@ -84,6 +90,7 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","stable")
 
                     }
+
                     "3" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_three)
@@ -91,6 +98,7 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","shoulder")
 
                     }
+
                     "4" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_four)
@@ -98,12 +106,14 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","shoulder")
 
                     }
+
                     "5" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_five)
                         message.text = "좌측으로 치우친 자세 입니다."
                         Myapplication.prefs.setString("state","waist")
                     }
+
                     "6" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_six)
@@ -111,6 +121,7 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","waist")
 
                     }
+
                     "7" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_seven)
@@ -118,6 +129,7 @@ class StateFragment : Fragment() {
                         Myapplication.prefs.setString("state","waist")
 
                     }
+
                     "8" ->
                     {
                         now_image.setImageResource(R.drawable.ic_pose_eight)
